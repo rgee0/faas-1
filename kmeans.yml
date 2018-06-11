@@ -4,6 +4,6 @@ provider:
 
 functions:
   kmeans:
-    lang: python3-armhf
+    lang: python3-debian-armhf
     handler: ./kmeans
     image: kmeans
