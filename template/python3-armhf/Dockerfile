@@ -1,10 +1,10 @@
 FROM armhf/python:3.6-alpine
 
-# Alternatively use ADD https:// (which will not be cached by Docker builder)
-RUN apk --no-cache add curl \ 
-    && echo "Pulling watchdog binary from Github." \
-    && curl -sSL https://github.com/openfaas/faas/releases/download/0.8.0/fwatchdog-armhf > /usr/bin/fwatchdog \
-    && chmod +x /usr/bin/fwatchdog \
+RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
+RUN apk --no-cache add curl make automake gcc g++ subversion python3-dev musl-dev libffi-dev lapack-dev gfortran \
+    && curl -sSL https://github.com/openfaas/faas/releases/download/0.8.2/fwatchdog-armhf > /usr/bin/fwatchdog \
+    && chmod +x /usr/bin/fwatchdog
     && apk del curl --no-cache
 
 # Add non root user
